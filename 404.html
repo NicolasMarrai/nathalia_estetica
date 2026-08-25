@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Página não encontrada | Nathalia Moura Estética</title>
+    <meta name="robots" content="noindex, follow" />
+    <meta name="theme-color" content="#f3d3d8" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23f3d3d8'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='28' font-weight='600' fill='%23b78d4f' text-anchor='middle'%3ENM%3C/text%3E%3C/svg%3E"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <!--
+      Página 404. Alguns provedores de hospedagem exigem configuração
+      adicional para exibir este arquivo automaticamente em erros 404
+      (ex: Netlify já reconhece "404.html" na raiz; outros provedores
+      podem exigir ajuste nas configurações do painel). Ver checklist.md.
+    -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="index.html" class="brand">
+          <span class="brand-name">Nathalia Moura</span>
+          <span class="brand-sub">Estética &amp; Sobrancelhas</span>
+        </a>
+      </div>
+    </header>
+
+    <main class="not-found">
+      <div class="container not-found-inner">
+        <p class="eyebrow center">Erro 404</p>
+        <h1>Essa página não existe (ou já mudou de endereço).</h1>
+        <p class="section-lead center">
+          Mas a agenda dela continua aberta. Que tal voltar para o início e
+          agendar sua avaliação gratuita?
+        </p>
+        <div class="hero-actions">
+          <a href="index.html" class="btn btn-gold">Voltar ao início</a>
+          <a
+            href="https://wa.me/5554999999999"
+            target="_blank"
+            rel="noopener"
+            class="btn btn-outline"
+            >Falar no WhatsApp</a
+          >
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p class="footer-copy">
+          © <span id="year"></span> Nathalia Moura Estética. Todos os
+          direitos reservados.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
