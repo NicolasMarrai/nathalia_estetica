@@ -429,29 +429,6 @@ p { margin: 0 0 1em; color: var(--ink-soft); }
   color: var(--gold-dark);
 }
 
-/* Jornada ---------------------------------------------------------------- */
-.jornada-card {
-  max-width: 760px;
-  margin: 3rem auto 0;
-  background: linear-gradient(160deg, var(--blush-100), var(--white));
-  border: 1px solid var(--blush-200);
-  border-left: 4px solid var(--gold);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-soft);
-  padding: 40px 44px;
-}
-.jornada-card p {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: 1.35rem;
-  line-height: 1.7;
-  color: var(--ink);
-}
-@media (max-width: 640px) {
-  .jornada-card { padding: 28px 24px; }
-  .jornada-card p { font-size: 1.15rem; }
-}
-
 /* Localização ---------------------------------------------------------------- */
 .loc-grid {
   display: grid;
