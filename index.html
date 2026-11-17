@@ -25,7 +25,7 @@
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/styles.css?v=2026-11-17" />
 
     <!-- Dados estruturados (Schema.org) para o Google entender que é um negócio local. -->
     <!-- TODO: ajustar telefone e horário quando definidos (ver checklist.md). -->
@@ -448,14 +448,31 @@
         <div class="container formacao-grid">
           <div class="formacao-photo reveal">
             <div class="ph-frame">
-              <!-- FOTO REAL AQUI: substituir images/formacao.jpg pela foto da Nathalia na formação -->
-              <div class="ph-block formacao-ph">
-                <img
-                  src="images/formacao.jpg"
-                  alt="Nathalia Moura ministrando a Formação Design de Excelência"
-                  class="formacao-img"
-                  onerror="this.hidden = true"
-                />
+              <!-- Carrossel: para adicionar fotos, inclua um novo <img class="formacao-slide"> em images/formacao/ -->
+              <div
+                class="ph-block formacao-ph formacao-carousel"
+                id="formacaoCarousel"
+                role="region"
+                aria-roledescription="carrossel"
+                aria-label="Fotos da Formação Design de Excelência"
+              >
+                <div class="formacao-slides">
+                  <img src="images/formacao/Imagem5.jpeg" alt="Nathalia Moura no espaço da Formação Design de Excelência" class="formacao-slide is-active" />
+                  <img src="images/formacao/Imagem1.jpeg" alt="Sala da formação preparada com kits para as alunas" class="formacao-slide" loading="lazy" />
+                  <img src="images/formacao/Imagem2.jpeg" alt="Nathalia ministrando a aula teórica da formação" class="formacao-slide" loading="lazy" />
+                  <img src="images/formacao/Imagem3.jpeg" alt="Nathalia apresentando os materiais do kit da aluna" class="formacao-slide" loading="lazy" />
+                  <img src="images/formacao/Imagem4.jpeg" alt="Kits de boas-vindas entregues às alunas da formação" class="formacao-slide" loading="lazy" />
+                </div>
+
+                <button type="button" class="formacao-nav formacao-prev" aria-label="Foto anterior">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg>
+                </button>
+                <button type="button" class="formacao-nav formacao-next" aria-label="Próxima foto">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+                </button>
+
+                <div class="formacao-dots" role="group" aria-label="Escolher foto"></div>
+                <div class="formacao-progress" aria-hidden="true"><span></span></div>
               </div>
             </div>
           </div>
@@ -612,6 +629,6 @@
       </button>
     </div>
 
-    <script src="js/main.js"></script>
+    <script src="js/main.js?v=2026-11-17"></script>
   </body>
 </html>

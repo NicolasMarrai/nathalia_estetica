@@ -98,3 +98,117 @@ if (cookieBanner && cookieAccept) {
     }
   });
 }
+
+// ==========================================================================
+// Carrossel da Formação
+// ==========================================================================
+const formacaoCarousel = document.getElementById("formacaoCarousel");
+
+if (formacaoCarousel) {
+  const slides = Array.from(formacaoCarousel.querySelectorAll(".formacao-slide"));
+  const dotsWrap = formacaoCarousel.querySelector(".formacao-dots");
+  const progress = formacaoCarousel.querySelector(".formacao-progress");
+  const SLIDE_TIME = 5000;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let current = 0;
+  let timer = null;
+  let paused = false;
+  let remaining = SLIDE_TIME;
+  let startedAt = 0;
+
+  formacaoCarousel.style.setProperty("--slide-time", `${SLIDE_TIME}ms`);
+
+  const dots = slides.map((_, i) => {
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.setAttribute("aria-label", `Ir para a foto ${i + 1} de ${slides.length}`);
+    dot.addEventListener("click", () => goTo(i));
+    dotsWrap.appendChild(dot);
+    return dot;
+  });
+
+  function restartProgress() {
+    if (!progress) return;
+    progress.classList.remove("is-running");
+    void progress.offsetWidth; // reinicia a animação
+    progress.classList.add("is-running");
+  }
+
+  function schedule(delay) {
+    clearTimeout(timer);
+    if (reduceMotion || paused) return;
+    startedAt = Date.now();
+    remaining = delay;
+    timer = setTimeout(() => goTo(current + 1), delay);
+  }
+
+  function goTo(index) {
+    current = (index + slides.length) % slides.length;
+    slides.forEach((s, i) => {
+      const active = i === current;
+      s.classList.toggle("is-active", active);
+      s.setAttribute("aria-hidden", String(!active));
+    });
+    dots.forEach((d, i) =>
+      d.setAttribute("aria-current", i === current ? "true" : "false"),
+    );
+    restartProgress();
+    schedule(SLIDE_TIME);
+  }
+
+  function pause() {
+    if (paused) return;
+    paused = true;
+    formacaoCarousel.classList.add("is-paused");
+    clearTimeout(timer);
+    remaining = Math.max(0, remaining - (Date.now() - startedAt));
+  }
+
+  function resume() {
+    if (!paused) return;
+    paused = false;
+    formacaoCarousel.classList.remove("is-paused");
+    schedule(remaining);
+  }
+
+  formacaoCarousel
+    .querySelector(".formacao-prev")
+    .addEventListener("click", () => goTo(current - 1));
+  formacaoCarousel
+    .querySelector(".formacao-next")
+    .addEventListener("click", () => goTo(current + 1));
+
+  // Pausa ao passar o mouse ou focar pelo teclado
+  formacaoCarousel.addEventListener("mouseenter", pause);
+  formacaoCarousel.addEventListener("mouseleave", resume);
+  formacaoCarousel.addEventListener("focusin", pause);
+  formacaoCarousel.addEventListener("focusout", resume);
+
+  // Setas do teclado
+  formacaoCarousel.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") goTo(current - 1);
+    if (e.key === "ArrowRight") goTo(current + 1);
+  });
+
+  // Arrastar no celular
+  let touchX = null;
+  formacaoCarousel.addEventListener(
+    "touchstart",
+    (e) => { touchX = e.touches[0].clientX; },
+    { passive: true },
+  );
+  formacaoCarousel.addEventListener("touchend", (e) => {
+    if (touchX === null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 40) goTo(dx < 0 ? current + 1 : current - 1);
+    touchX = null;
+  });
+
+  // Não troca de foto com a aba escondida
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) pause();
+    else resume();
+  });
+
+  goTo(0);
+}
